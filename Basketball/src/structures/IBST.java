@@ -1,13 +1,24 @@
 package structures;
 
+/**
+ * Árbol ABB / Binary Search Tree
+ * @author Daniel
+ *
+ * @param <T>
+ */
+
 public interface IBST <T>{
 	
-	public void insert(T element);
+	public void insert(int id);
 	
-	public T find(int value);
+	public NodeBST<T> find(int value);
 	
-	public void delete(int value);
+	public boolean delete(int value);
 	
-	public T getSuccessor(T node);
+	public NodeBST<T> getSuccessor(NodeBST<T> node);
+	
+	public NodeBST<T> getPredecessor(NodeBST<T> node);
+	
+	public int getSize();
 
 }

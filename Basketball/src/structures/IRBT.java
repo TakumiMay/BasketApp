@@ -20,16 +20,16 @@ public interface IRBT <T>{
 	
 	public void insertFixup(T node);
 	
-	public T smallestChild(T node);
+	public T predecessor(T node);
 	
 	public T successor(T node);
 	
-	public void remove(T node);
+	public void delete(T node);
 	
 	public void fixNodeData(T x, T y);
 	
-	public void removeFixup(T sonOfParentRemoved);
+	public void deleteFixup(T sonOfParentRemoved);
 	
-	public T search(T key);
+	public T find(T key);
 
 }

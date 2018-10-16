@@ -6,12 +6,20 @@ package structures;
  *
  */
 
-public interface IAVL <T>{
+public interface IAVL {
 	
-	public void rotateRight(T node);
+	public NodeAVL rotateRight(NodeAVL node);
+	
+	public NodeAVL rotateLeft(NodeAVL node);
+	
+	public void delete (int node);
+	
+	public void rebalance(NodeAVL node);
+	
+	public NodeAVL find(int key);
 	
 	public boolean isEmpty();
 	
-	public void insert(T data);
+	public boolean insert(int data);
 
 }
