@@ -116,7 +116,7 @@ public class BST<T> implements IBST<T> {
 		}else if(current.getLeft()!=null && current.getRight()!=null){
 			
 			//now we have found the minimum element in the right sub tree
-			NodeBST<T> successor = getSuccessor(current);
+			NodeBST<T> successor = getSuccessor(current.getRight());//----------------------------
 			if(current==root){
 				root = successor;
 			}else if(isLeftChild){
@@ -131,24 +131,31 @@ public class BST<T> implements IBST<T> {
 	}
 
 	@Override
-	public NodeBST<T> getSuccessor(NodeBST<T> node) {
-		NodeBST<T> successsor =null;
-		NodeBST<T> successsorParent =null;
-		NodeBST<T> current = node.getRight();
-		while(current!=null){
-			successsorParent = successsor;
-			successsor = current;
-			current = current.getLeft();
-		}
-		//check if successor has the right child, it cannot have left child for sure
-		// if it does have the right child, add it to the left of successorParent.
-//		successsorParent
-		if(successsor!=node.getRight()){
-			successsorParent.setLeft(successsor.getRight());
-			successsor.setRight(node.getRight());
-		}
-		return successsor;
-	}
+public NodeBST<T> getSuccessor(NodeBST<T> rightChild){
+    	
+        while(rightChild.getLeft()!=null){
+            rightChild = rightChild.getLeft();
+        }
+        return rightChild;
+    }
+//	public NodeBST<T> getSuccessor(NodeBST<T> node) {
+//		NodeBST<T> successsor =null;
+//		NodeBST<T> successsorParent =null;
+//		NodeBST<T> current = node.getRight();
+//		while(current!=null){
+//			successsorParent = successsor;
+//			successsor = current;
+//			current = current.getLeft();
+//		}
+//		//check if successor has the right child, it cannot have left child for sure
+//		// if it does have the right child, add it to the left of successorParent.
+////		successsorParent
+//		if(successsor!=node.getRight()){
+//			successsorParent.setLeft(successsor.getRight());
+//			successsor.setRight(node.getRight());
+//		}
+//		return successsor;
+//	}
 
 	@Override
 	public NodeBST<T> getPredecessor(NodeBST<T> node) {
@@ -161,34 +168,14 @@ public class BST<T> implements IBST<T> {
 		return size;
 	}
 	
-	public void display(NodeBST<T> root){
-		if(root!=null){
-			display(root.getLeft());
-			System.out.print(" " + root.getData());
-			display(root.getRight());
-		}
-	}
+//	public void display(NodeBST<T> root){
+//		if(root!=null){
+//			display(root.getLeft());
+//			System.out.print(" " + root.getData());
+//			display(root.getRight());
+//		}
+//	}
 	
-	public static void main(String arg[]){
-		BST b = new BST();
-		b.insert(5);b.insert(4);
-		b.insert(6);b.insert(3);b.insert(7);//b.insert(8);
-//		b.insert(3);b.insert(8);
-//		b.insert(1);b.insert(4);b.insert(6);b.insert(2);b.insert(10);b.insert(9);
-//		b.insert(20);b.insert(25);b.insert(15);b.insert(16);
-		System.out.println("Original Tree : ");
-		b.display(b.root);		
-		System.out.println("");
-		System.out.println("Check whether Node with value 4 exists : " + b.find(4));
-		System.out.println("Delete Node with no children (3) : " + b.delete(3));		
-		b.display(b.root);
-		System.out.println("\n Delete Node with one child (4) : " + b.delete(4));		
-		b.display(b.root);
-//		System.out.println("\n Delete Node with Two children (5) : " + b.delete(5));		
-//		b.display(b.root);
-		
-//		NodeBST<Integer> nodo = b.getPredecessor(b.find(5));
-//		System.out.println(nodo.getData());
-	}
+
 
 }

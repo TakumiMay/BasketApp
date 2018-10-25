@@ -3,9 +3,11 @@ package structures;
 import java.util.Scanner;
 
 /**
-* 
-*/
-
+ * Red Black Tree
+ * @author Daniel
+ *
+ * @param <T>
+ */
 public class RBT<T> implements IRBT<T> {
 
 	public final static int RED = 0;
@@ -35,7 +37,6 @@ public class RBT<T> implements IRBT<T> {
         }
         printTree(node.left);
         System.out.print(" "+node.key+" ");
-      //  System.out.print(((node.color==RED)?"Color: Red ":"Color: Black ")+"Key: "+node.key+" Parent: "+node.parent.key+"\n");
         printTree(node.right);
     }
     
@@ -53,24 +54,24 @@ public class RBT<T> implements IRBT<T> {
 		return current;
 	}
 
-    private NodeRBT<T> findNode(NodeRBT findNode, NodeRBT node) {
-        if (root == nil) {
-            return null;
-        }
-
-        if (findNode.key < node.key) {
-            if (node.left != nil) {
-                return findNode(findNode, node.left);
-            }
-        } else if (findNode.key > node.key) {
-            if (node.right != nil) {
-                return findNode(findNode, node.right);
-            }
-        } else if (findNode.key == node.key) {
-            return node;
-        }
-        return null;
-    }
+//    private NodeRBT<T> findNode(NodeRBT findNode, NodeRBT node) {
+//        if (root == nil) {
+//            return null;
+//        }
+//
+//        if (findNode.key < node.key) {
+//            if (node.left != nil) {
+//                return findNode(findNode, node.left);
+//            }
+//        } else if (findNode.key > node.key) {
+//            if (node.right != nil) {
+//                return findNode(findNode, node.right);
+//            }
+//        } else if (findNode.key == node.key) {
+//            return node;
+//        }
+//        return null;
+//    }
 
     public void insert(int id) {
     	NodeRBT<T> node = new NodeRBT<T>(id);
@@ -104,7 +105,10 @@ public class RBT<T> implements IRBT<T> {
         }
     }
 
-    //Takes as argument the newly inserted node
+    /**
+     * Fix the balance at insert a new node
+     * @param node - newly node inserted
+     */
     public void fixUp(NodeRBT<T> node) {
         while (node.parent.color == RED) {
         	NodeRBT<T> uncle = nil;
@@ -203,10 +207,7 @@ public class RBT<T> implements IRBT<T> {
         }
     }
 
-//    //Deletes whole tree
-//    void deleteTree(){
-//        root = nil;
-//    }
+
     
     //Deletion Code .
     
@@ -225,7 +226,8 @@ public class RBT<T> implements IRBT<T> {
     
     public boolean delete(int id){
     	NodeRBT<T> z = new NodeRBT<T>(id);
-        if((z = findNode(z, root))==null)return false;
+        //if((z = findNode(z, root))==null)return false;
+    	if((z = find(z.key))==null)return false;
         NodeRBT<T> x;
         NodeRBT<T> y = z; // temporary reference y
         int y_original_color = y.color;
@@ -330,87 +332,7 @@ public class RBT<T> implements IRBT<T> {
     
     
     
-//    public void consoleUI() {
-//        Scanner scan = new Scanner(System.in);
-//        while (true) {
-//            System.out.println("\n1.- Add items\n"
-//                    + "2.- Delete items\n"
-//                    + "3.- Check items\n"
-//                    + "4.- Print tree\n"
-//                    + "5.- Delete tree\n");
-//            int choice = scan.nextInt();
-//
-//            int item;
-//            NodeRBT node;
-//            switch (choice) {
-//                case 1:
-//                    item = scan.nextInt();
-//                    while (item != -999) {
-//                        node = new NodeRBT(item);
-//                        insert(node);
-//                        item = scan.nextInt();
-//                    }
-//                    printTree(root);
-//                    break;
-//                case 2:
-//                    item = scan.nextInt();
-//                    while (item != -999) {
-//                        node = new NodeRBT(item);
-//                        System.out.print("\nDeleting item " + item);
-//                        if (delete(node)) {
-//                            System.out.print(": deleted!");
-//                        } else {
-//                            System.out.print(": does not exist!");
-//                        }
-//                        item = scan.nextInt();
-//                    }
-//                    System.out.println();
-//                    printTree(root);
-//                    break;
-//                case 3:
-//                    item = scan.nextInt();
-//                    while (item != -999) {
-//                        node = new NodeRBT(item);
-//                        System.out.println((findNode(node, root) != null) ? "found" : "not found");
-//                        item = scan.nextInt();
-//                    }
-//                    break;
-//                case 4:
-//                    printTree(root);
-//                    break;
-//                case 5:
-//                    //deleteTree();
-//                    System.out.println("Tree deleted!");
-//                    break;
-//            }
-//        }
-//    }
-//    public static void main(String[] args) {
-//        RBT rbt = new RBT();
-//        rbt.consoleUI();
-//    }
+
     
-	public static void main(String arg[]){
-		RBT<Integer> b = new RBT<Integer>();
-//		b.insert(new NodeRBT(3));b.insert(new NodeRBT(8));
-//		b.insert(new NodeRBT(1));b.insert(new NodeRBT(4));b.insert(new NodeRBT(6));b.insert(new NodeRBT(2));b.insert(new NodeRBT(10));b.insert(new NodeRBT(9));
-//		b.insert(new NodeRBT(20));b.insert(new NodeRBT(25));b.insert(new NodeRBT(15));b.insert(new NodeRBT(61));
-		b.insert(5);b.insert(4);
-		b.insert(6);b.insert(3);b.insert(7);//b.insert(8);
-		System.out.println("Original Tree : ");
-		b.printTree(b.root);	
-		System.out.println("");
-		System.out.println("Check whether Node with value 4 exists : " + b.find(4).key);
-	//	System.out.println("Check whether Node with value 4 exists : " + b.findNode(new NodeRBT(4), b.root).key);
-		//System.out.println("Delete Node with no children (2) : " + b.delete(new NodeRBT(2)));		
-		//b.printTree(b.root);
-		//System.out.println("\n Delete Node with one child (4) : " + b.delete(new NodeRBT(4)));		
-		//b.printTree(b.root);
-		System.out.println("\n Delete Node with Two children (5) : " + b.getSuccessor(b.root.getRight()).key);		
-		b.printTree(b.root);
-		
-		//System.out.println("\n Color of 8 and children : " +b.find(8).left.key);
-		System.out.println("\n Hijo derecho raiz : " +b.root.key);
-		
-	}
+	
     }

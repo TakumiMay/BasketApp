@@ -52,7 +52,7 @@ class BSTTest {
 	@Test
 	public void getSuccessorTest() {
 		setupStage2();
-		assertTrue(arbol.getSuccessor(arbol.find(5)).getData() == 6);
+		assertTrue(arbol.getSuccessor(arbol.find(5).getRight()).getData() == 6);
 	}
 
 //	@Test

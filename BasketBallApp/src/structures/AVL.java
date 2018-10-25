@@ -9,8 +9,30 @@ public class AVL<T> implements IAVL<T> {
 	
 	
 		 
-	    NodeAVL<T> root;
-	    int size;
+	   private NodeAVL<T> root;
+	   private int size;
+	    
+	    
+	    public NodeAVL<T> getRoot() {
+			return root;
+		}
+
+
+		public void setRoot(NodeAVL<T> root) {
+			this.root = root;
+		}
+
+
+		public int getSize() {
+			return size;
+		}
+
+
+		@Override
+		public boolean isEmpty() {
+			// TODO Auto-generated method stub
+			return root == null;
+		}
 	 
 	   
 	    @Override
@@ -194,17 +216,17 @@ public class AVL<T> implements IAVL<T> {
 	        }
 	    }
 	 
-	    public void printBalance() {
-	        printBalance(root);
-	    }
-	 
-	    private void printBalance(NodeAVL<T> n) {
-	        if (n != null) {
-	            printBalance(n.left);
-	            System.out.printf("%s ", n.balance);
-	            printBalance(n.right);
-	        }
-	    }
+//	    public void printBalance() {
+//	        printBalance(root);
+//	    }
+//	 
+//	    private void printBalance(NodeAVL<T> n) {
+//	        if (n != null) {
+//	            printBalance(n.left);
+//	            System.out.printf("%s ", n.balance);
+//	            printBalance(n.right);
+//	        }
+//	    }
 	 
 	    private void reheight(NodeAVL<T> node) {
 	        if (node != null) {
@@ -227,59 +249,13 @@ public class AVL<T> implements IAVL<T> {
 			return current;
 	    }
 	    
-	    public void printTree(NodeAVL<T> node) {
-	        if (node == null) {
-	            return;
-	        }
-	        printTree(node.left);
-	        System.out.print(" "+node.key+" ");
-	      //  System.out.print(((node.color==RED)?"Color: Red ":"Color: Black ")+"Key: "+node.key+" Parent: "+node.parent.key+"\n");
-	        printTree(node.right);
-	    }
-	 
-//	    public static void main(String[] args) {
-//	    	AVL tree = new AVL();
-//	   	 
-//	        System.out.println("Inserting values 1 to 10");
-//	        for (int i = 1; i < 10; i++)
-//	            tree.insert(i);
-//	 
-//	        System.out.print("Printing balance: ");
-//	        tree.printBalance();
-//	        
-//	        System.out.println(+tree.find(7).getKey());
-//		}
-	    
-	    public static void main(String arg[]){
-			AVL<Integer> b = new AVL<Integer>();
-//			b.insert(new NodeRBT(3));b.insert(new NodeRBT(8));
-//			b.insert(new NodeRBT(1));b.insert(new NodeRBT(4));b.insert(new NodeRBT(6));b.insert(new NodeRBT(2));b.insert(new NodeRBT(10));b.insert(new NodeRBT(9));
-//			b.insert(new NodeRBT(20));b.insert(new NodeRBT(25));b.insert(new NodeRBT(15));b.insert(new NodeRBT(61));
-			b.insert(5);b.insert(4);
-			b.insert(6);b.insert(3);b.insert(7);//b.insert(8);
-			System.out.println("Original Tree : ");
-			b.printTree(b.root);	
-			System.out.println("");
-			System.out.println("Check whether Node with value 4 exists : " + b.find(4).key);
-		//	System.out.println("Check whether Node with value 4 exists : " + b.findNode(new NodeRBT(4), b.root).key);
-			//System.out.println("Delete Node with no children (2) : " + b.delete(new NodeRBT(2)));		
-			//b.printTree(b.root);
-			//System.out.println("\n Delete Node with one child (4) : " + b.delete(new NodeRBT(4)));		
-			//b.printTree(b.root);
-			//System.out.println("\n Delete Node with Two children (5) : " + b.getSuccessor(b.root.getRight()).key);		
-			b.printTree(b.root);
-			
-			//System.out.println("\n Color of 8 and children : " +b.find(8).left.key);
-			System.out.println("\n Hijo derecho raiz : " +b.root.key);
-			
-		}
 
 
-		@Override
-		public boolean isEmpty() {
-			// TODO Auto-generated method stub
-			return root == null;
-		}
+
+		
+
+
+		
 	
 
 	
