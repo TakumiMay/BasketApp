@@ -8,28 +8,28 @@ package structures;
 
 public interface IRBT <T>{
 	
-	public void leftRotate(T x);
+	public void rotateLeft(NodeRBT<T> x);
 	
-	public void leftRotateFixup(T y);
+	//public void leftRotateFixup(NodeRBT<T> y);
 	
-	public void rightRotate(T x);
+	public void rotateRight(NodeRBT<T> x);
 	
-	public void rightRotateFixup(T y);
+	//public void rightRotateFixup(NodeRBT<T> y);
 	
-	public void insert(T node);
+	public void insert(int id);
 	
-	public void insertFixup(T node);
+	public void fixUp(NodeRBT<T> node);
 	
-	public T predecessor(T node);
+	//public NodeRBT<T> getPredecessor(NodeRBT<T> node);
 	
-	public T successor(T node);
+	public NodeRBT<T> getSuccessor(NodeRBT<T> node);
 	
-	public void delete(T node);
+	public boolean delete(int id);
 	
-	public void fixNodeData(T x, T y);
+	//public void fixNodeData(NodeRBT<T> x, NodeRBT<T> y);
 	
-	public void deleteFixup(T sonOfParentRemoved);
+	public void deleteFixup(NodeRBT<T> sonOfParentRemoved);
 	
-	public T find(T key);
+	public NodeRBT<T> find(int key);
 
 }

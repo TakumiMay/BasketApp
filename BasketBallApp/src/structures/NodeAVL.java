@@ -1,14 +1,14 @@
 package structures;
 
-public class NodeAVL {
-    int key;
+public class NodeAVL<T> {
+    protected int key;
     int balance;
     int height;
-    NodeAVL left;
-    NodeAVL right;
-    NodeAVL parent;
+    NodeAVL<T> left;
+    NodeAVL<T> right;
+    NodeAVL<T> parent;
 
-    NodeAVL(int key, NodeAVL parent) {
+    NodeAVL(int key, NodeAVL<T> parent) {
         this.key = key;
         this.parent = parent;
     }
@@ -37,27 +37,27 @@ public class NodeAVL {
 		this.height = height;
 	}
 
-	public NodeAVL getLeft() {
+	public NodeAVL<T> getLeft() {
 		return left;
 	}
 
-	public void setLeft(NodeAVL left) {
+	public void setLeft(NodeAVL<T> left) {
 		this.left = left;
 	}
 
-	public NodeAVL getRight() {
+	public NodeAVL<T> getRight() {
 		return right;
 	}
 
-	public void setRight(NodeAVL right) {
+	public void setRight(NodeAVL<T> right) {
 		this.right = right;
 	}
 
-	public NodeAVL getParent() {
+	public NodeAVL<T> getParent() {
 		return parent;
 	}
 
-	public void setParent(NodeAVL parent) {
+	public void setParent(NodeAVL<T> parent) {
 		this.parent = parent;
 	}
     

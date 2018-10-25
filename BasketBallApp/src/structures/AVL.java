@@ -5,37 +5,37 @@ package structures;
  *
  */
 
-public class AVL implements IAVL {
+public class AVL<T> implements IAVL<T> {
 	
 	
 		 
-	    NodeAVL root;
+	    NodeAVL<T> root;
 	    int size;
 	 
 	   
 	    @Override
 	    public boolean insert(int key) {
 	    	if (root == null) {
-	            root = new NodeAVL(key, null);
+	            root = new NodeAVL<T>(key, null);
 	            size++;
 	            return true;
 	        }
 	 
-	        NodeAVL n = root;
+	    	NodeAVL<T> n = root;
 	        while (true) {
-	            if (n.key == key)
+	            if (n.getKey() == key)
 	                return false;
 	 
-	            NodeAVL parent = n;
+	            NodeAVL<T> parent = n;
 	 
-	            boolean goLeft = n.key > key;
+	            boolean goLeft = n.getKey() > key;
 	            n = goLeft ? n.left : n.right;
 	 
 	            if (n == null) {
 	                if (goLeft) {
-	                    parent.left = new NodeAVL(key, parent);
+	                    parent.left = new NodeAVL<T>(key, parent);
 	                } else {
-	                    parent.right = new NodeAVL(key, parent);
+	                    parent.right = new NodeAVL<T>(key, parent);
 	                }
 	                rebalance(parent);
 	                break;
@@ -46,12 +46,12 @@ public class AVL implements IAVL {
 	    }
 	    
 	    
-	    private void delete(NodeAVL node) {
+	    private void delete(NodeAVL<T> node) {
 	        if (node.left == null && node.right == null) {
 	            if (node.parent == null) {
 	                root = null;
 	            } else {
-	            	NodeAVL parent = node.parent;
+	            	NodeAVL<T> parent = node.parent;
 	                if (parent.left == node) {
 	                    parent.left = null;
 	                } else {
@@ -63,14 +63,14 @@ public class AVL implements IAVL {
 	        }
 	 
 	        if (node.left != null) {
-	        	NodeAVL child = node.left;
+	        	NodeAVL<T> child = node.left;
 	            while (child.right != null) child = child.right;
-	            node.key = child.key;
+	            node.key = child.getKey();
 	            delete(child);
 	        } else {
-	        	NodeAVL child = node.right;
+	        	NodeAVL<T> child = node.right;
 	            while (child.left != null) child = child.left;
-	            node.key = child.key;
+	            node.key = child.getKey();
 	            delete(child);
 	        }
 	    }
@@ -80,11 +80,11 @@ public class AVL implements IAVL {
 	        if (root == null)
 	            return;
 	 
-	        NodeAVL child = root;
+	        NodeAVL<T> child = root;
 	        while (child != null) {
-	        	NodeAVL node = child;
-	            child = delKey >= node.key ? node.right : node.left;
-	            if (delKey == node.key) {
+	        	NodeAVL<T> node = child;
+	            child = delKey >= node.getKey() ? node.right : node.left;
+	            if (delKey == node.getKey()) {
 	                delete(node);
 	                size--;
 	                return;
@@ -93,7 +93,7 @@ public class AVL implements IAVL {
 	    }
 	    
 	    @Override
-	    public void rebalance(NodeAVL n) {
+	    public void rebalance(NodeAVL<T> n) {
 	        setBalance(n);
 	 
 	        if (n.balance == -2) {
@@ -117,9 +117,9 @@ public class AVL implements IAVL {
 	    }
 	    
 	    @Override
-	    public NodeAVL rotateLeft(NodeAVL a) {
+	    public NodeAVL<T> rotateLeft(NodeAVL<T> a) {
 	 
-	    	NodeAVL b = a.right;
+	    	NodeAVL<T> b = a.right;
 	        b.parent = a.parent;
 	 
 	        a.right = b.left;
@@ -145,9 +145,9 @@ public class AVL implements IAVL {
 	    
 	    
 	    @Override
-	    public NodeAVL rotateRight(NodeAVL a) {
+	    public NodeAVL<T> rotateRight(NodeAVL<T> a) {
 	 
-	    	NodeAVL b = a.left;
+	    	NodeAVL<T> b = a.left;
 	        b.parent = a.parent;
 	 
 	        a.left = b.right;
@@ -171,23 +171,23 @@ public class AVL implements IAVL {
 	        return b;
 	    }
 	 
-	    private NodeAVL rotateLeftThenRight(NodeAVL n) {
+	    private NodeAVL<T> rotateLeftThenRight(NodeAVL<T> n) {
 	        n.left = rotateLeft(n.left);
 	        return rotateRight(n);
 	    }
 	 
-	    private NodeAVL rotateRightThenLeft(NodeAVL n) {
+	    private NodeAVL<T> rotateRightThenLeft(NodeAVL<T> n) {
 	        n.right = rotateRight(n.right);
 	        return rotateLeft(n);
 	    }
 	 
-	    private int height(NodeAVL n) {
+	    private int height(NodeAVL<T> n) {
 	        if (n == null)
 	            return -1;
 	        return n.height;
 	    }
 	 
-	    private void setBalance(NodeAVL... nodes) {
+	    private void setBalance(NodeAVL<T>... nodes) {
 	        for (NodeAVL n : nodes) {
 	            reheight(n);
 	            n.balance = height(n.right) - height(n.left);
@@ -198,7 +198,7 @@ public class AVL implements IAVL {
 	        printBalance(root);
 	    }
 	 
-	    private void printBalance(NodeAVL n) {
+	    private void printBalance(NodeAVL<T> n) {
 	        if (n != null) {
 	            printBalance(n.left);
 	            System.out.printf("%s ", n.balance);
@@ -206,14 +206,14 @@ public class AVL implements IAVL {
 	        }
 	    }
 	 
-	    private void reheight(NodeAVL node) {
+	    private void reheight(NodeAVL<T> node) {
 	        if (node != null) {
 	            node.height = 1 + Math.max(height(node.left), height(node.right));
 	        }
 	    }
 	    
 	    @Override
-	    public NodeAVL find(int id) {
+	    public NodeAVL<T> find(int id) {
 	    	NodeAVL current = root;
 			while(current!=null){
 				if(current.key==id){
@@ -226,18 +226,52 @@ public class AVL implements IAVL {
 			}
 			return current;
 	    }
+	    
+	    public void printTree(NodeAVL<T> node) {
+	        if (node == null) {
+	            return;
+	        }
+	        printTree(node.left);
+	        System.out.print(" "+node.key+" ");
+	      //  System.out.print(((node.color==RED)?"Color: Red ":"Color: Black ")+"Key: "+node.key+" Parent: "+node.parent.key+"\n");
+	        printTree(node.right);
+	    }
 	 
-	    public static void main(String[] args) {
-	    	AVL tree = new AVL();
-	   	 
-	        System.out.println("Inserting values 1 to 10");
-	        for (int i = 1; i < 10; i++)
-	            tree.insert(i);
-	 
-	        System.out.print("Printing balance: ");
-	        tree.printBalance();
-	        
-	        System.out.println(+tree.find(7).getKey());
+//	    public static void main(String[] args) {
+//	    	AVL tree = new AVL();
+//	   	 
+//	        System.out.println("Inserting values 1 to 10");
+//	        for (int i = 1; i < 10; i++)
+//	            tree.insert(i);
+//	 
+//	        System.out.print("Printing balance: ");
+//	        tree.printBalance();
+//	        
+//	        System.out.println(+tree.find(7).getKey());
+//		}
+	    
+	    public static void main(String arg[]){
+			AVL<Integer> b = new AVL<Integer>();
+//			b.insert(new NodeRBT(3));b.insert(new NodeRBT(8));
+//			b.insert(new NodeRBT(1));b.insert(new NodeRBT(4));b.insert(new NodeRBT(6));b.insert(new NodeRBT(2));b.insert(new NodeRBT(10));b.insert(new NodeRBT(9));
+//			b.insert(new NodeRBT(20));b.insert(new NodeRBT(25));b.insert(new NodeRBT(15));b.insert(new NodeRBT(61));
+			b.insert(5);b.insert(4);
+			b.insert(6);b.insert(3);b.insert(7);//b.insert(8);
+			System.out.println("Original Tree : ");
+			b.printTree(b.root);	
+			System.out.println("");
+			System.out.println("Check whether Node with value 4 exists : " + b.find(4).key);
+		//	System.out.println("Check whether Node with value 4 exists : " + b.findNode(new NodeRBT(4), b.root).key);
+			//System.out.println("Delete Node with no children (2) : " + b.delete(new NodeRBT(2)));		
+			//b.printTree(b.root);
+			//System.out.println("\n Delete Node with one child (4) : " + b.delete(new NodeRBT(4)));		
+			//b.printTree(b.root);
+			//System.out.println("\n Delete Node with Two children (5) : " + b.getSuccessor(b.root.getRight()).key);		
+			b.printTree(b.root);
+			
+			//System.out.println("\n Color of 8 and children : " +b.find(8).left.key);
+			System.out.println("\n Hijo derecho raiz : " +b.root.key);
+			
 		}
 
 

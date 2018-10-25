@@ -6,17 +6,17 @@ package structures;
  *
  */
 
-public interface IAVL {
+public interface IAVL<T> {
 	
-	public NodeAVL rotateRight(NodeAVL node);
+	public NodeAVL<T> rotateRight(NodeAVL<T> node);
 	
-	public NodeAVL rotateLeft(NodeAVL node);
+	public NodeAVL<T> rotateLeft(NodeAVL<T> node);
 	
 	public void delete (int node);
 	
-	public void rebalance(NodeAVL node);
+	public void rebalance(NodeAVL<T> node);
 	
-	public NodeAVL find(int key);
+	public NodeAVL<T> find(int key);
 	
 	public boolean isEmpty();
 	
