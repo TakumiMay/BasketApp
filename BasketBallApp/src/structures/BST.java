@@ -1,10 +1,5 @@
 package structures;
-/**
- * Binary Search Tree
- * @author Daniel
- *
- * @param <T>
- */
+
 
 public class BST<T> implements IBST<T> {
 	

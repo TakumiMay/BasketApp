@@ -1,9 +1,4 @@
 package structures;
-/**
- * Class for AVL Tree
- * @author Daniel
- *
- */
 
 public class AVL<T> implements IAVL<T> {
 	

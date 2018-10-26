@@ -2,12 +2,7 @@ package structures;
 
 import java.util.Scanner;
 
-/**
- * Red Black Tree
- * @author Daniel
- *
- * @param <T>
- */
+
 public class RBT<T> implements IRBT<T> {
 
 	public final static int RED = 0;
